@@ -12,14 +12,31 @@
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app"></div>
     <script>
-        // vm contiene toda la aplicacion
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "<p>Hola Vue </p>",
+                    text: "Puerta cerrada",
+                    open: false
                 };
             },
-            template: `<div v-html="text"></div>`
+            watch: {
+                open(value) {
+                    if (value) {
+                        this.text = "Puerta abierta"
+                    } else {
+                        this.text = "Puerta cerrada"
+                    }
+                },
+            },
+            computed: {
+                label() {
+                    return this.open ? "Cerrar" : "Abrir"
+                }
+            },
+            template: `
+            <div>{{text}}</div>
+            <button @click="open=!open" >{{label}}</button>
+            `
         }).mount("#app");
 
     </script>
