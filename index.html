@@ -12,15 +12,34 @@
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app"></div>
     <script>
-        // vm contiene toda la aplicacion
-        const vm = Vue.createApp({
+
+        const app = Vue.createApp({
             data() {
                 return {
-                    text: "<p>Hola Vue </p>",
+                    text: "Hola Vue"
                 };
             },
-            template: `<div v-html="text"></div>`
-        }).mount("#app");
+            template: `
+            <div>
+                <p>{{text}}</p>
+                <v-input v-model:value="text"/>
+            </div>
+            `
+        })
+
+        app.component("v-input", {
+            props: {
+                value: String
+            },
+            methods: {
+                input(e) {
+                    this.$emit("update:value", e.target.value)
+                }
+            },
+            template: `<input type="text" :value="value" @input="input"/>`
+        });
+
+        const vm = app.mount("#app");
 
     </script>
 </body>
