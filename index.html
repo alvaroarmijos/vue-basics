@@ -16,10 +16,11 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "<p>Hola Vue </p>",
+                    img: "https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ"
                 };
             },
-            template: `<div v-html="text"></div>`
+            template: `<img :src="img" :alt="img" />`
+
         }).mount("#app");
 
     </script>
