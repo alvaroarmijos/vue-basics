@@ -12,15 +12,31 @@
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app"></div>
     <script>
-        // vm contiene toda la aplicacion
-        const vm = Vue.createApp({
+        const app = Vue.createApp({
             data() {
                 return {
-                    text: "<p>Hola Vue </p>",
+                    items: [
+                        "uno", "dos", "tres", ,
+                    ],
                 };
             },
-            template: `<div v-html="text"></div>`
-        }).mount("#app");
+            template: `
+                <ul>
+                    <v-item v-for="item in items" :text="item"></v-item>
+                </ul>
+            `
+        });
+
+        app.component("v-item", {
+            props: {
+                text: {
+                    type: String,
+                    default: "Texto vacio"
+                }
+            },
+            template: `<li>{{text}}</li>`
+        })
+        const vm = app.mount("#app");
 
     </script>
 </body>
