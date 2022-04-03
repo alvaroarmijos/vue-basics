@@ -16,10 +16,32 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "<p>Hola Vue </p>",
+                    counter: 0
                 };
             },
-            template: `<div v-html="text"></div>`
+            methods: {
+                increment() {
+                    //se le indica con {this} que se refiere a la variable del componente
+                    this.counter++;
+                },
+                decrement() {
+                    //se le indica con {this} que se refiere a la variable del componente
+                    this.counter--;
+                },
+                submit() {
+                    this.counter++;
+                }
+            },
+            template: `
+            <center>
+            <h1>{{counter}}</h1>
+            <button v-on:click="increment">Increment</button>
+            <button v-on:click="decrement">Decrement</button>
+            </center>
+
+            `
+            // template: `<form v-on:submit.prevent="submit"><button >{{counter}}</button></form>`
+
         }).mount("#app");
 
     </script>
