@@ -10,17 +10,18 @@
 
 <body>
     <script src="https://unpkg.com/vue@next"></script>
-    <div id="app">{{text}}</div>
+    <div id="app"></div>
     <script>
         // vm contiene toda la aplicacion
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Hola Vue",
+                    text: "<p>Hola Vue </p>",
                 };
-            }
+            },
+            template: `<div v-html="text"></div>`
         }).mount("#app");
-        console.log(vm);
+
     </script>
 </body>
 
