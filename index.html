@@ -16,25 +16,36 @@
             data() {
                 return {
                     items: [
-                        "uno", "dos", "tres", ,
+                        "uno", "dos", "tres"
                     ],
                 };
             },
+            methods: {
+                remove(i) {
+                    this.items = this.items.filter((el, index) => index !== i);
+                }
+            },
             template: `
                 <ul>
-                    <v-item v-for="item in items" :text="item"></v-item>
+                    <v-item 
+                        v-for="(item, i) in items" 
+                        :text="item"
+                        @remove="remove(i)"
+                    />
                 </ul>
             `
         });
 
         app.component("v-item", {
             props: {
-                text: {
-                    type: String,
-                    default: "Texto vacio"
-                }
+                text: String
             },
-            template: `<li>{{text}}</li>`
+            methods: {
+                rm() {
+                    this.$emit("remove");
+                },
+            },
+            template: `<li @click="rm">{{text}}</li>`
         })
         const vm = app.mount("#app");
 
